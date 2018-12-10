@@ -1,11 +1,25 @@
 package jp.ac.uryukyu.ie.e175734;
 
+/**
+ * 生物クラス。
+ * ゲームの敵や味方キャラを生成する元になるクラス。
+ * String name; //生物の名前
+ * int hitPoint; //体力
+ * int attack; //攻撃力
+ * boolean dead; //生死状態。true = 死んでいる状態。
+ */
 public class LivingThing {
     private String name;
     private int hitPoint;
     private int attack;
     private boolean dead;
 
+    /**
+     * コンストラクタ。名前，最大体力，攻撃力を指定する。
+     * @param name 生成されるキャラクターの名前
+     * @param hitPoint キャラクターのHP
+     * @param attack キャラクターの攻撃力
+     */
     public LivingThing(String name, int hitPoint, int attack) {
         this.name = name;
         this.hitPoint = hitPoint;
@@ -47,6 +61,11 @@ public class LivingThing {
     }
 
 
+    /**
+     * 攻撃するメソッド。
+     * 相手が死亡状態でない時，攻撃する。
+     * @param livingThing 本クラス。ここでは，対象とする相手になる。
+     */
     public void attack(LivingThing livingThing) {
         int damage = (int) (Math.random() * attack);
         if (dead == false) {
@@ -55,6 +74,11 @@ public class LivingThing {
         }
     }
 
+    /**
+     * 自身へ攻撃された時にダメージ処理をするメソッド。
+     * 受けたダメージをhitPointから引き，死亡判定を行う。
+     * @param damage 受けたダメージ
+     */
     public void wounded(int damage){
         hitPoint -= damage;
         if( hitPoint < 0 ) {
